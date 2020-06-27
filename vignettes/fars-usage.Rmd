@@ -1,0 +1,70 @@
+---
+title: "Usage of fars functions"
+author: "Giulia Pais"
+date: "27-06-2020"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{fars-usage}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(fars)
+library(dplyr)
+library(readr)
+```
+# Using fars functions to import, summarize and visualize Fatality Analysis Reporting System data
+The fars package includes a variety of functions that allow you to analyze files from the Fatality Analysis
+Reporting System. Let's go through a basic workflow, how should you use this package?
+
+### If you're interested in import only
+For importing one or more files to analyze you can use two different functions, `fars_read` or `fars_read_years`.
+`fars_read` takes only one string object as a parameter which represents the path to the file you want to import
+and it's most useful when you want to import a single dataset:
+```{r echo=FALSE, eval=TRUE}
+pathToFile <- system.file("extdata","accident_2013.csv.bz2",package ="fars")
+```
+```{r echo = TRUE}
+df <- fars_read(pathToFile)
+head(df)
+```
+`fars_read_years` takes a vector of positive integers as input, which represents the years that the datasets are
+referring to. Please note that to be able to import the datasets with year only, the csv files should be in your
+default directory or current directory if you have a project open. If you'd like to change your current directory you shoud use `#setwd("appropriate/path")`.
+
+```{r echo = TRUE}
+new <- system.file("extdata",package ="fars")
+setwd(new)
+dfy <- fars_read_years(c(2013,2014,2015))
+head(dfy)
+```
+
+A list of tibbles is returned, each of them showing only month and year columns.
+
+### Importing and summarizing
+If you're interested in summarizing the data counting the number of accidents for year and month you should use
+`fars_summarize_years`: as previously, this function takes a vector of positive integers representing years as a vector. It relies internally on `fars_read_years`, so all of the previous recommendations are still valid.
+```{r echo = TRUE}
+new <- system.file("extdata",package ="fars")
+setwd(new)
+summary <- fars_summarize_years(c(2013,2014,2015))
+head(summary)
+```
+
+### Visualizing the accidents on map
+It's useful to have a visualization of all the accidents that occurred in a single state and in a certain year.
+To do this simply use `fars_map_state`:
+```{r echo = TRUE}
+new <- system.file("extdata",package ="fars")
+setwd(new)
+fars_map_state(1, 2013)
+```
+By providing a valid state number and a year a map is plotted displaying the coordinates of the various accidents happened in 2013.

@@ -1,0 +1,28 @@
+Package: fars
+Title: Utility functions for the analysis of Fatality Analysis Reporting System files
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Giulia",
+           family = "Pais",
+           role = c("aut", "cre"),
+           email = "giuliapais1@gmail.com")
+Description: Provides a set of utility functions to read and summarize  Fatality Analysis Reporting System files.
+  It's possible to read sigle files given the path on disk or provide a year and construct a path for import.
+  Summarizes operations comprise the count of accidents in a file grouped by year and month, and a plotting function
+  is provided to better visualize the coordinates and density of accidents on a map.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.0
+Suggests: 
+    testthat,
+    knitr,
+    rmarkdown
+Imports: 
+    dplyr,
+    readr,
+    tidyr,
+    maps,
+    graphics
+VignetteBuilder: knitr
