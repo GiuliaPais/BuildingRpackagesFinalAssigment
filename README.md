@@ -5,7 +5,8 @@
 [![Travis build status](https://travis-ci.com/GiuliaPais/BuildingRpackagesFinalAssigment.svg?branch=master)](https://travis-ci.com/GiuliaPais/BuildingRpackagesFinalAssigment)
 <!-- badges: end -->
 
-The goal of fars is to ...
+Utility functions for the analysis of Fatality Analysis Reporting System files.
+
 
 ## Installation
 
